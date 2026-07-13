@@ -1,0 +1,119 @@
+.dental-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+}
+
+.jaw {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quadrant {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quadrant-divider {
+  width: 2px;
+  background-color: var(--border-color);
+  height: 80px;
+  margin: 0 0.5rem;
+}
+
+.jaw-divider {
+  height: 2px;
+  background-color: var(--border-color);
+  width: 100%;
+  max-width: 800px;
+  margin: 1.5rem 0;
+}
+
+.tooth-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.tooth-wrapper:hover {
+  background-color: var(--bg-main);
+  transform: translateY(-2px);
+}
+
+.upper-jaw .tooth-wrapper {
+  flex-direction: column;
+}
+
+.lower-jaw .tooth-wrapper {
+  flex-direction: column-reverse;
+}
+
+.tooth-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 24px;
+}
+
+.lower-jaw .tooth-icon {
+  flex-direction: column-reverse;
+}
+
+.tooth-crown {
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff;
+  border: 2px solid var(--text-light);
+  border-radius: 4px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.tooth-root {
+  width: 12px;
+  height: 16px;
+  background-color: transparent;
+  border: 2px solid var(--text-light);
+  border-top: none;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-top: -2px;
+  transition: all 0.2s;
+}
+
+.lower-jaw .tooth-root {
+  border-top: 2px solid var(--text-light);
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  margin-top: 0;
+  margin-bottom: -2px;
+}
+
+.tooth-wrapper:hover .tooth-crown,
+.tooth-wrapper:hover .tooth-root {
+  border-color: var(--primary-color);
+  background-color: rgba(13, 148, 136, 0.1);
+}
+
+.tooth-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-main);
+}

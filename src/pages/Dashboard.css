@@ -1,0 +1,131 @@
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-info h3 {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-bottom: 0.25rem;
+}
+
+.stat-change {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.stat-change.positive {
+  color: var(--success-color);
+}
+
+.appointments-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.appointment-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.appointment-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.appointment-item .time {
+  font-weight: 600;
+  color: var(--primary-color);
+  min-width: 80px;
+}
+
+.appointment-item .details {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-item .details span {
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+}
+
+.activity-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  margin-top: 0.375rem;
+  position: relative;
+}
+
+.activity-dot::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: -24px;
+  right: 5px;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.activity-item:last-child .activity-dot::after {
+  display: none;
+}
+
+.activity-text p {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.activity-text .time-ago {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
