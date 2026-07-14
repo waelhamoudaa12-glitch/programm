@@ -5,6 +5,7 @@ import Patients from './pages/Patients';
 import PatientProfile from './pages/PatientProfile';
 import Financials from './pages/Financials';
 import Inventory from './pages/Inventory';
+import Appointments from './pages/Appointments';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/appointments" element={<Appointments />} />
             <Route path="/patients" element={<Patients />} />
             <Route path="/patients/:id" element={<PatientProfile />} />
             <Route path="/financials" element={<Financials />} />

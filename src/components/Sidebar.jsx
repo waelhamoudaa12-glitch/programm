@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, Receipt, Activity, Package } from 'lucide-react';
+import { LayoutDashboard, Users, Receipt, Activity, Package, CalendarDays } from 'lucide-react';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -13,6 +13,10 @@ const Sidebar = () => {
         <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')} end>
           <LayoutDashboard size={20} />
           <span>الرئيسية</span>
+        </NavLink>
+        <NavLink to="/appointments" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
+          <CalendarDays size={20} />
+          <span>المواعيد</span>
         </NavLink>
         <NavLink to="/patients" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}>
           <Users size={20} />
