@@ -162,3 +162,104 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-sm { font-size: 0.875rem; }
 .text-muted { color: var(--text-light); }
+
+/* =========================================
+   Mobile Responsive Styles
+   ========================================= */
+@media (max-width: 768px) {
+  /* Layout */
+  .app-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    padding: 1rem;
+    padding-bottom: 5rem; /* Make room for bottom nav */
+  }
+
+  /* Sidebar to Bottom Nav */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-inline-end: none;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  }
+
+  .sidebar-header, .sidebar-footer {
+    display: none; /* Hide extra info on small screens */
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0.5rem;
+    width: 100%;
+  }
+
+  .nav-item {
+    flex-direction: column;
+    padding: 0.5rem;
+    font-size: 0.7rem;
+    gap: 0.25rem;
+    text-align: center;
+  }
+
+  .nav-item span {
+    display: block;
+  }
+
+  /* Grids */
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .profile-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Headers & Buttons */
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+
+  .page-header > div {
+    width: 100%;
+  }
+
+  .page-header button {
+    width: 100%;
+  }
+
+  /* Search & Modals */
+  .search-box {
+    width: 100% !important;
+  }
+
+  .modal-content {
+    width: 95% !important;
+    max-width: 100% !important;
+    padding: 1rem !important;
+  }
+
+  /* Tables */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+  
+  .patients-table th, .patients-table td {
+    padding: 0.75rem 0.5rem;
+    white-space: nowrap;
+  }
+}
+
