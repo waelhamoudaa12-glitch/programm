@@ -174,21 +174,21 @@ h1, h2, h3, h4, h5, h6 {
 
   .main-content {
     padding: 1rem;
-    padding-bottom: 5rem; /* Make room for bottom nav */
+    padding-top: 5rem; /* Make room for top nav */
   }
 
-  /* Sidebar to Bottom Nav */
+  /* Sidebar to Top Nav */
   .sidebar {
     width: 100%;
     height: auto;
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     z-index: 100;
     border-inline-end: none;
-    border-top: 1px solid var(--border-color);
-    box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
   }
 
   .sidebar-header, .sidebar-footer {
