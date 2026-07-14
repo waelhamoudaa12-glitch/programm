@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DollarSign, ArrowUpRight, ArrowDownRight, Plus } from 'lucide-react';
+import { DollarSign, ArrowUpRight, ArrowDownRight, Plus, Trash2 } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 import './Financials.css';
 
@@ -56,6 +56,19 @@ const Financials = () => {
         }
       } catch (error) {
         console.error('Error adding transaction:', error.message);
+      }
+    }
+  };
+
+  const handleDeleteTransaction = async (id) => {
+    if (window.confirm('هل أنت متأكد من مسح هذه المعاملة؟ لا يمكن التراجع عن هذا الإجراء.')) {
+      try {
+        const { error } = await supabase.from('transactions').delete().eq('id', id);
+        if (error) throw error;
+        setTransactions(transactions.filter(tx => tx.id !== id));
+      } catch (err) {
+        console.error('Error deleting transaction:', err.message);
+        alert('حدث خطأ أثناء مسح المعاملة.');
       }
     }
   };
@@ -125,6 +138,7 @@ const Financials = () => {
                   <th>الوصف</th>
                   <th>النوع</th>
                   <th>المبلغ</th>
+                  <th>إجراء</th>
                 </tr>
               </thead>
               <tbody>
@@ -142,6 +156,11 @@ const Financials = () => {
                       </span>
                     </td>
                     <td style={{ fontWeight: 'bold' }}>{Number(tx.amount).toLocaleString()} ج.م</td>
+                    <td>
+                      <button className="btn btn-outline" onClick={() => handleDeleteTransaction(tx.id)} style={{ color: 'var(--danger-color)', borderColor: 'var(--danger-color)', padding: '0.25rem 0.5rem' }} title="مسح">
+                        <Trash2 size={16} />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
