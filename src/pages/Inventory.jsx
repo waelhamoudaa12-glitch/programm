@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Package, Plus, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Package, Plus, AlertCircle, CheckCircle2, Trash2 } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 import './Inventory.css';
 
@@ -97,6 +97,19 @@ const Inventory = () => {
     }
   };
 
+  const handleDeleteItem = async (id) => {
+    if (window.confirm('هل أنت متأكد من مسح هذه المادة من المخزن؟')) {
+      try {
+        const { error } = await supabase.from('inventory').delete().eq('id', id);
+        if (error) throw error;
+        setItems(items.filter(item => item.id !== id));
+      } catch (err) {
+        console.error('Error deleting item:', err.message);
+        alert('حدث خطأ أثناء مسح المادة.');
+      }
+    }
+  };
+
   return (
     <div className="inventory-page">
       <header className="page-header flex justify-between items-center">
@@ -124,6 +137,7 @@ const Inventory = () => {
                   <th>اسم المادة / الأداة</th>
                   <th>الكمية المتوفرة</th>
                   <th>الحالة</th>
+                  <th>إجراء</th>
                 </tr>
               </thead>
               <tbody>
@@ -163,6 +177,11 @@ const Inventory = () => {
                             <CheckCircle2 size={14} /> متوفر
                           </span>
                         )}
+                      </td>
+                      <td>
+                        <button className="btn btn-outline" onClick={() => handleDeleteItem(item.id)} style={{ color: 'var(--danger-color)', borderColor: 'var(--danger-color)', padding: '0.25rem 0.5rem' }}>
+                          <Trash2 size={16} />
+                        </button>
                       </td>
                     </tr>
                   ))
