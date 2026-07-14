@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .main-content {
     padding: 1rem;
-    padding-top: 5rem; /* Make room for top nav */
+    padding-top: 7rem !important; /* Increased space so page-header doesn't hide behind top nav */
   }
 
   /* Sidebar to Top Nav */
@@ -186,10 +186,11 @@ h1, h2, h3, h4, h5, h6 {
     left: 0 !important;
     right: 0 !important;
     z-index: 100 !important;
+    background-color: var(--bg-card) !important; /* Force solid background */
     border-inline-end: none !important;
     border-bottom: 1px solid var(--border-color) !important;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05) !important;
-    flex-direction: column !important; /* Switch to column if needed, or let nav handle it */
+    box-shadow: 0 4px 10px -2px rgb(0 0 0 / 0.1) !important;
+    flex-direction: column !important;
   }
 
   .sidebar-header, .sidebar-footer {
@@ -206,7 +207,8 @@ h1, h2, h3, h4, h5, h6 {
   .nav-item {
     flex-direction: column;
     padding: 0.5rem;
-    font-size: 0.7rem;
+    font-size: 0.85rem !important; /* Made text bigger and clearer */
+    font-weight: 600 !important;
     gap: 0.25rem;
     text-align: center;
   }
