@@ -7,7 +7,7 @@ const Sidebar = () => {
     <aside className="sidebar">
       <div className="sidebar-header">
         <Activity className="logo-icon" size={32} />
-        <h2>Elhady Clinic</h2>
+        <h2>Clinic</h2>
       </div>
       <nav className="sidebar-nav">
         <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')} end>
