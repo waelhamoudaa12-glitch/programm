@@ -11,6 +11,7 @@ const Inventory = () => {
   const [newItemName, setNewItemName] = useState('');
   const [newItemQty, setNewItemQty] = useState('');
   const [newItemUnit, setNewItemUnit] = useState('قطعة');
+  const [newItemCost, setNewItemCost] = useState('');
 
   useEffect(() => {
     fetchInventory();
@@ -49,11 +50,26 @@ const Inventory = () => {
           .select();
 
         if (error) throw error;
+        
+        // 2. Add transaction record automatically
+        const { error: txError } = await supabase
+          .from('transactions')
+          .insert([
+            {
+              description: `شراء للمخزن: ${newItemName}`,
+              amount: parseFloat(newItemCost),
+              type: 'مصروف'
+            }
+          ]);
+          
+        if (txError) throw txError;
+
         if (data) {
           setItems([data[0], ...items]);
           setShowAddModal(false);
           setNewItemName('');
           setNewItemQty('');
+          setNewItemCost('');
         }
       } catch (error) {
         console.error('Error adding item:', error.message);
@@ -198,6 +214,17 @@ const Inventory = () => {
                     <option value="لتر">لتر</option>
                   </select>
                 </div>
+              </div>
+              <div className="input-group">
+                <label className="input-label">إجمالي التكلفة (ج.م)</label>
+                <input 
+                  type="number" 
+                  className="input-field" 
+                  placeholder="مثال: 200" 
+                  value={newItemCost}
+                  onChange={(e) => setNewItemCost(e.target.value)}
+                  required
+                />
               </div>
               <div className="flex justify-between mt-6">
                 <button type="button" className="btn btn-outline" onClick={() => setShowAddModal(false)}>إلغاء</button>

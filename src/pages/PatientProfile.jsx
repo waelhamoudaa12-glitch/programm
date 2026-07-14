@@ -15,6 +15,7 @@ const PatientProfile = () => {
   const [toothNumber, setToothNumber] = useState('');
   const [problem, setProblem] = useState('');
   const [procedure, setProcedure] = useState('');
+  const [price, setPrice] = useState('');
   
   const [treatmentPlan, setTreatmentPlan] = useState([]);
   
@@ -77,17 +78,32 @@ const PatientProfile = () => {
               patient_id: patient.id,
               tooth: toothNumber, 
               problem: problem, 
-              procedure: procedure
+              procedure: `${procedure} (المبلغ: ${price} ج.م)`
             }
           ])
           .select();
 
         if (error) throw error;
+        
+        // 2. Add transaction record automatically
+        const { error: txError } = await supabase
+          .from('transactions')
+          .insert([
+            {
+              description: `علاج مريض: ${patient.name} - ${procedure}`,
+              amount: parseFloat(price),
+              type: 'دخل'
+            }
+          ]);
+          
+        if (txError) throw txError;
+
         if (data) {
           setTreatmentPlan([data[0], ...treatmentPlan]);
           setToothNumber('');
           setProblem('');
           setProcedure('');
+          setPrice('');
         }
       } catch (error) {
         console.error('Error saving diagnosis:', error.message);
@@ -213,6 +229,18 @@ const PatientProfile = () => {
                   onChange={(e) => setProcedure(e.target.value)}
                   required
                 ></textarea>
+              </div>
+
+              <div className="input-group">
+                <label className="input-label">المبلغ المدفوع (ج.م)</label>
+                <input 
+                  type="number" 
+                  className="input-field" 
+                  placeholder="مثال: 500"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  required
+                />
               </div>
 
               <div className="flex mt-2">
