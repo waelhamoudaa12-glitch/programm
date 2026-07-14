@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowRight, UserCircle, Phone, Calendar, Plus, Upload, X } from 'lucide-react';
+import { ArrowRight, UserCircle, Phone, Calendar, Plus, Upload, X, Trash2 } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 import './PatientProfile.css';
 
@@ -115,18 +115,36 @@ const PatientProfile = () => {
     }
   };
 
+  const handleDeletePatient = async () => {
+    if (window.confirm('هل أنت متأكد من حذف هذا المريض؟ سيتم مسح كافة السجلات الطبية المرتبطة به إلى الأبد.')) {
+      try {
+        const { error } = await supabase.from('patients').delete().eq('id', id);
+        if (error) throw error;
+        navigate('/patients');
+      } catch (err) {
+        console.error('Error deleting patient:', err.message);
+        alert('حدث خطأ أثناء مسح المريض.');
+      }
+    }
+  };
+
   if (loading) return <div className="p-8 text-center">جاري تحميل بيانات المريض...</div>;
   if (!patient) return <div className="p-8 text-center text-danger">لم يتم العثور على المريض.</div>;
 
   return (
     <div className="patient-profile">
-      <header className="page-header flex items-center gap-4">
-        <button className="btn btn-outline" onClick={() => navigate('/patients')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <ArrowRight size={18} /> رجوع
-        </button>
-        <div>
-          <h1>ملف المريض: {patient.name}</h1>
+      <header className="page-header flex items-center justify-between w-full">
+        <div className="flex items-center gap-4">
+          <button className="btn btn-outline" onClick={() => navigate('/patients')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: 'auto' }}>
+            <ArrowRight size={18} /> رجوع
+          </button>
+          <div>
+            <h1>ملف المريض: {patient.name}</h1>
+          </div>
         </div>
+        <button className="btn" onClick={handleDeletePatient} style={{ backgroundColor: 'var(--danger-color)', color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem', width: 'auto' }}>
+          <Trash2 size={18} /> مسح المريض
+        </button>
       </header>
 
       <div className="profile-grid grid grid-cols-3 gap-6">
