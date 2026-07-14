@@ -73,6 +73,19 @@ const Financials = () => {
     }
   };
 
+  const handleResetAccounts = async () => {
+    if (window.confirm('تنبيه خطير: هل أنت متأكد من تصفير الحسابات (جرد)؟ سيتم مسح جميع الإيرادات والمصروفات الحالية نهائياً ولن تتمكن من استرجاعها.')) {
+      try {
+        const { error } = await supabase.from('transactions').delete().not('id', 'is', null);
+        if (error) throw error;
+        setTransactions([]);
+      } catch (err) {
+        console.error('Error resetting accounts:', err.message);
+        alert('حدث خطأ أثناء تصفير الحسابات.');
+      }
+    }
+  };
+
   const totalIncome = transactions.filter(t => t.type === 'دخل').reduce((acc, curr) => acc + Number(curr.amount), 0);
   const totalExpense = transactions.filter(t => t.type === 'مصروف').reduce((acc, curr) => acc + Number(curr.amount), 0);
   const netProfit = totalIncome - totalExpense;
@@ -84,9 +97,14 @@ const Financials = () => {
           <h1>المالية والحسابات</h1>
           <p className="text-muted">نظرة عامة على الإيرادات والمصروفات</p>
         </div>
-        <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
-          <Plus size={18} /> تسجيل معاملة جديدة
-        </button>
+        <div className="flex gap-2">
+          <button className="btn btn-outline" style={{ borderColor: 'var(--danger-color)', color: 'var(--danger-color)' }} onClick={handleResetAccounts} title="مسح جميع المعاملات وبدء جرد جديد">
+            <Trash2 size={18} /> تصفير الحسابات
+          </button>
+          <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
+            <Plus size={18} /> تسجيل معاملة جديدة
+          </button>
+        </div>
       </header>
 
       <div className="grid grid-cols-3 gap-6 mt-6">
