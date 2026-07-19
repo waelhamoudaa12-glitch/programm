@@ -199,15 +199,23 @@ h1, h2, h3, h4, h5, h6 {
 
   .sidebar-nav {
     flex-direction: row !important;
-    justify-content: space-around !important;
-    padding: 0.5rem !important;
+    justify-content: flex-start !important;
+    padding: 0.5rem 1rem !important;
     width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem !important;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-item {
+    flex: 0 0 auto !important;
     flex-direction: column;
-    padding: 0.5rem;
-    font-size: 0.85rem !important; /* Made text bigger and clearer */
+    padding: 0.5rem 0.5rem !important;
+    font-size: 0.85rem !important;
     font-weight: 600 !important;
     gap: 0.25rem;
     text-align: center;
